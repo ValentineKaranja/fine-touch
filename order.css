@@ -1,0 +1,11 @@
+.order-form{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	padding-left: 10px;
+
+}
+#order{
+	display: flex;
+	justify-content: center;
+}
