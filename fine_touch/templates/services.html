@@ -1,37 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>products and services</title>
-</head>
-<body>
-	<div class="articles">
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="articles">
 	     		<div class="cards">
 	     			<h1 id="services"><u>PRODUCTS & SERVICES</u></h1>	
 	     			<div class="gallery">
-	     				<img src="img/cleaning-guys.png">
+	     				<img src="{% static 'images/cleaning-guys.png' %}">
 	     				<div class="text"><h2>General cleaning services</h2></div>
 	     			</div>
 	      			<div class="gallery">
-	     				<img src="img/laundry.png">
+	     				<img src="{% static 'images/laundry.png' %}">
 	     				<div class="text"><h2>Laundry services</h2></div>
 	     			</div>
 	      			<div class="gallery">
-	     				<img src="img/meal.png">
+	     				<img src="{% static 'images/meal.png' %}">
 	     				<div class="text"><h2>cooking and delivering nutritious meals</h2></div>
 	     			</div>
 	      			<div class="gallery">
-	     				<img src="img/spa.png">
+	     				<img src="{% static 'images/spa.png' %}">
 	     				<div class="text"><h2>Spa services</h2></div>
 	    			</div>
 	      			<div class="gallery">
-	     				<img src="img/drinks.jpg">
+	     				<img src="{% static 'images/drinks.jpg' %}">
 	     				<div class="text"><h2>Making and delivering fruit juice/smoothies</h2></div>
 	     			</div>
 	      			<div class="gallery">
-	     				<img src="img/beauty2.png">
+	     				<img src="{% static 'images/beauty2.png' %}">
 	     				<div class="text"><h2>Beauty services</h2></div>
 	     			</div>
      		</div>
 
-</body>
-</html>
+
+
+{% endblock content %}

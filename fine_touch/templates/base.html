@@ -16,6 +16,7 @@
    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/prods.css' %}">
 
 
   <!-- Custom fonts for this template -->
@@ -35,11 +36,7 @@
  
  {% endblock content %}
 
-  <footer class="footer text-faded text-center py-5">
-    <div class="container">
-      <p class="m-0 small">Copyright &copy; valentinekaranja 2020</p>
-    </div>
-  </footer>
+{% include "store.html" %}
 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'js/jquery.min.js' %}"></script>

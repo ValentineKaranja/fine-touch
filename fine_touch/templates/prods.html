@@ -1,70 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+{% extends "base.html" %}
+{% load static %}
 
-  <title> Mami's Touch Haven! </title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
-  <link href="business-casual.min.css" rel="stylesheet">
-
-  <link rel="stylesheet" type="text/css" href="prods.css">
-</head>
-<body>
-	  <h1 class="site-heading text-center text-white d-none d-lg-block">
-    <span class="site-heading-lower">Mami's Touch Haven! </span>
-    <span class="site-heading-upper text-primary mb-3">A fine touch right at your door step</span>
-    
-  </h1>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Mami's Touch Haven!</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="index.html">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="about.html">About</a>
-          </li>
-          <li class="nav-item active px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="prods.html">Products</a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="store.html">contact</a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="order.html">make-order</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-	<div class="articles" id="Products">
+{% block content %}
+<div class="articles" id="Products">
 	     		<div class="cards">
 	     			<h1 id="services"><u>PRODUCTS & SERVICES</u></h1>
 	     			<h2><u>1.cleaning services</u></h2>	
 		     			<div id="clean" class="gallery">
-		     				<img src="cleaning-guys.png">
+		     				<img src="{% static 'images/cleaning-guys.png' %}">
 		     				<div class="text"><h2>General cleaning services</h2></div>
 		     			</div>
 		      			<div id="clean" class="gallery">
-		     				<img src="laundry.png">
+		     				<img src="{% static 'images/laundry.png' %}">
 		     				<div class="text"><h2>Laundry services</h2></div>
 		     			</div>
 		     			
@@ -73,11 +21,11 @@
      			<div class="cards">
 	     			<h2><u>2.food delivery</u></h2>
 		     			<div id="food" class="gallery">
-		     				<img src="other1.jpg">
+		     				<img src="{% static 'images/other1.jpg' %}">
 		     				<div class="text"><h2>We cook and deliver nutritious meals</h2></div>
 		     			</div>
 		      			<div id="food" class="gallery">
-		     				<img src="drinks.jpg">
+		     				<img src="{% static 'images/drinks.jpg' %}">
 		     				<div class="text"><h2>Blended juice!</h2></div>
 		     			</div>
 		     			
@@ -86,11 +34,11 @@
      			<div class="cards">
 	     			<h2><u>Salad bar menu</u></h2>
 		     			<div id="food" class="gallery">
-		     				<img src="salad1.jpg">
+		     				<img src="{% static 'images/salad1.jpg' %}">
 		     				<div class="text"><h2>Mango,cucumber, beetroot salad</h2></div>
 		     			</div>
 		      			<div id="food" class="gallery">
-		     				<img src="salad3.jpg">
+		     				<img src="{% static 'images/salad3.jpg' %}">
 		     				<div class="text"><h2>Tomato-avocado salad</h2></div>
 		     			</div>
 		     			
@@ -98,11 +46,11 @@
 
      			<div class="cards">
 	   	     			<div id="food" class="gallery">
-		     				<img src="salad4.jpg">
+		     				<img src="{% static 'images/salad4.jpg' %}">
 		     				<div class="text"><h2>Fresh garden salad</h2></div>
 		     			</div>
 		      			<div id="food" class="gallery">
-		     				<img src="salad2.jpg">
+		     				<img src="{% static 'images/salad2.jpg' %}">
 		     				<div class="text"><h2>Egg-avocado salad</h2></div>
 		     			</div>
 		     			
@@ -111,11 +59,11 @@
      			<div class="cards">
 	     			<h2><u>3.spa services</u></h2>
 		     			<div id="food" class="gallery">
-		     				<img src="massage.jpg">
+		     				<img src="{% static 'images/massage.jpg' %}">
 		     				<div class="text"><h2>Professional massage for body ache</h2></div>
 		     			</div>
 		      			<div id="food" class="gallery">
-		     				<img src="beauty.jpg">
+		     				<img src="{% static 'images/beauty.jpg' %}">
 		     				<div class="text"><h2>beauty services</h2></div>
 		     			</div>
 		     			
@@ -124,15 +72,5 @@
 
      		</div>
 
-    <footer class="footer text-faded text-center py-5">
-    <div class="container">
-      <p class="m-0 small">Copyright &copy; valentinekaranja 2020</p>
-    </div>
-  </footer>
 
-   <script src="jquery.min.js"></script>
-  <script src="bootstrap.bundle.min.js"></script>
-
- 
-</body>
-</html>
+{% endblock content %}
