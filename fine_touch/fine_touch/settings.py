@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core.apps.CoreConfig',  # referring to config file
+    'phonenumber_field', # django phonenumber field
 ]
 
 MIDDLEWARE = [

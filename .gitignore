@@ -4,14 +4,13 @@
 *.pyc
 ../../__pycache__
 db.sqlite3
-media
+media_root
 
 # Backup files #
 *.bak
 
 node_modules
 venv/
-.vscode/
 
 # If you are using PyCharm #
 .idea/**/workspace.xml
