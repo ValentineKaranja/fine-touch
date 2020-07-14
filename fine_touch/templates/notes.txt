@@ -1,0 +1,15 @@
+
+                          <label>Select your preffered place to get the service</label><br>
+                          <select>
+                            <option>At our identified location</option>
+                            <option>At your location</option>
+                          </select><br><br>
+
+
+                          <p>what is your location</p><br>
+                          <textarea  name ="message" rows="5" cols="45" ></textarea> <br>
+
+
+                        <p>Please describe your order</p>
+                          <textarea  name ="message" rows="15" cols="45" ></textarea> 
+                        <br />

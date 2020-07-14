@@ -19,16 +19,18 @@
                 <div class="row">
 
                 <!-- Grid column -->
-                  <div class="col-md-6">
+                  <div class="col-lg">
 
                     <div class="md-form mb-0">
 
                       <form class="form" method="post">
                         {% csrf_token %}
                         <div class="form-group">
+                          <label>Select your preffered place to get the service: </label>
                             {{ form.location }}
                         </div>
                         <div class="form-group">
+                          <label>Please describe your order: </label>
                             {{ form.description }}
                         </div>                            
 
