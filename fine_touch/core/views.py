@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import ProductName, ProductServices, Order
+from django.shortcuts import render, redirect
+from .models import ProductName, ProductServices, Order, Customer
 from .forms import OrderForm
 
 # Create your views here.
@@ -8,8 +8,8 @@ def home(request):
     return render(request, 'index.html', {'products':products})
 
 
-def product(request, name):
-    details = ProductServices.objects.filter(product_name__name__contains=name)
+def product(request, slug):
+    details = ProductServices.objects.filter(product_name__slug=slug)
     return render(request, 'prods.html', {'details':details})
 
 
@@ -17,7 +17,8 @@ def services(request):
     return render(request, 'services.html')
 
 def order(request, slug):
-    customer = request.user
+    customer = Customer.objects.get(user=request.user)
+    product = ProductServices.objects.get(slug=slug)
     form = OrderForm()
 
     if request.method == 'POST':
@@ -27,9 +28,11 @@ def order(request, slug):
                 customer=customer,
                 location=form.cleaned_data["location"],
                 description=form.cleaned_data["description"],
-                product=slug,
+                product=product,
             )
             obj.save()
+            print('item added')
+            return redirect('/')
     
     return render(request, 'order.html', {'form': form})
 

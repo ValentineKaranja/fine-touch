@@ -7,12 +7,12 @@ class OrderForm(forms.Form):
         max_length=99,
         widget=forms.TextInput(attrs={
             "class": "form-control",
-            "placeholder": "Tell us your location"
+            "placeholder": "Tell us your location, eg. Fitz building next to TRM"
         })
     )
     description = forms.CharField(widget=forms.Textarea(
         attrs={
             "class": "form-control",
-            "placeholder": "Describe your order specifics"
+            "placeholder": "eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago salad"
         })
     )

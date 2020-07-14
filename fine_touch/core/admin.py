@@ -7,7 +7,12 @@ from .models import *
 class ProductServiceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('service_name',)}
 
+
+class ProductNameAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+
 admin.site.register(ProductServices, ProductServiceAdmin)
 admin.site.register(Customer)
-admin.site.register(ProductName)
+admin.site.register(ProductName, ProductNameAdmin)
 admin.site.register(Order)

@@ -22,8 +22,14 @@ class Customer(models.Model):  # cascade means if model is deleted the relations
 
 class ProductName(models.Model):
     name = models.CharField(max_length=500, null=True, db_column='Product Offered')
+    slug = models.SlugField(max_length=80, unique=True)
     image = models.ImageField(upload_to='media_root', null=True, blank=True)
     description = models.TextField(db_column='Product Description')
+
+    def get_absolute_url(self):
+        return reverse("product", kwargs={
+        'slug': self.slug
+    })
 
     def __str__(self):
         return self.name
@@ -41,7 +47,7 @@ class ProductServices(models.Model):
         verbose_name_plural = 'Product Services'
 
     def get_absolute_url(self):
-        return reverse("product", kwargs={
+        return reverse("order", kwargs={
         'slug': self.slug
     })
 
@@ -63,5 +69,5 @@ class Order(models.Model):
     description = models.TextField(db_column='Order Description')
 
     def __str__(self):
-        return self.product.name
+        return self.product.service_name
     

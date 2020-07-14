@@ -21,7 +21,7 @@
 						<div class="bg-faded p-5 rounded">
 							<p class="mb-0">{{detail.description}}</p>
 							<div class="intro-button mx-auto">
-								<a class="btn btn-primary btn-xl" href="{% url 'order' detail.slug %}">Make an Order</a>
+								<a class="btn btn-primary btn-xl" href="{{ detail.get_absolute_url }}">Make an Order</a>
 							</div>
 						</div>
 					
