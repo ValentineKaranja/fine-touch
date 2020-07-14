@@ -37,5 +37,5 @@ def order(request, slug):
     return render(request, 'order.html', {'form': form})
 
 
-def store(request):
-    return render(request, 'store.html')
+def about(request):
+    return render(request, 'about.html')
