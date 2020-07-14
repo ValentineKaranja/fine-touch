@@ -1,8 +1,56 @@
 from django.shortcuts import render, redirect
+from .decorators import unauthenticated_user
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 from .models import ProductName, ProductServices, Order, Customer
-from .forms import OrderForm
+from .forms import OrderForm, CreateUserForm
 
 # Create your views here.
+
+@unauthenticated_user
+def register_page(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')
+
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'accounts/register.html', context=context_dict)
+
+
+@unauthenticated_user
+def login_page(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username or Password is incorrect')
+
+    context_dict = {
+
+    }
+    return render(request, 'accounts/login.html', context=context_dict)
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('login')
+
+
 def home(request):
     products = ProductName.objects.all()
     return render(request, 'index.html', {'products':products})
@@ -16,6 +64,9 @@ def product(request, slug):
 def services(request):
     return render(request, 'services.html')
 
+
+@login_required(login_url='login')  # decorator redirects one to the login page
+# if they try to access this page
 def order(request, slug):
     customer = Customer.objects.get(user=request.user)
     product = ProductServices.objects.get(slug=slug)
