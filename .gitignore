@@ -47,3 +47,6 @@ venv/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
+# environment specifics
+.env

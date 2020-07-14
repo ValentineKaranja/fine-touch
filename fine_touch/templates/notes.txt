@@ -13,3 +13,7 @@
                         <p>Please describe your order</p>
                           <textarea  name ="message" rows="15" cols="45" ></textarea> 
                         <br />
+
+remote: Create a pull request for 'backend' on GitHub by visiting:
+remote:      https://github.com/IanMaguithi/fine-touch/pull/new/backend
+remote:
