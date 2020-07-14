@@ -1,38 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 id="order"><u>PLACE YOUR ORDER</u></h1>
+
+<!-- Section: Order -->
+<section class="contact-section my-5">
   <div class="order-form">
-    <form class="form">
-          <label for="contact">phone number:</label>
-          <input type="text" placeholder="+254 7********" name="phone number"><br><br>
-          <label> Select the service you need</label><br>
-          <select >
-            <option>A MEAL</option>
-            <option>DRINKS/SMOOTHIES</option>
-            <option>LAUNDRY</option>
-            <option>GENERAL CLEANING</option>
-            <option>SPA SERVICES</option>
-          </select> <br><br>
+    <div class='card'>
+  <!-- Grid row -->
+      <div class="row">
 
-          <label>Select your preffered place to get the service</label><br>
-          <select>
-            <option>At our identified location</option>
-            <option>At your location</option>
-          </select><br><br>
+        <!-- Grid column -->
+        <div class="col-lg-12">
+
+          <div class="card-body form">
+
+            <!-- Header -->
+            <h3 class="mt-4" id="order"><u>PLACE YOUR ORDER</u></h3>
+            <!-- Grid row -->
+              <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6">
+
+                  <div class="md-form mb-0">
+
+                    <form class="form">
+                          <label for="contact">phone number:</label>
+                          <input type="text" placeholder="+254 7********" name="phone number"><br><br>
+                          <label> Select the service you need</label><br>
+                          <select >
+                            <option>A MEAL</option>
+                            <option>DRINKS/SMOOTHIES</option>
+                            <option>LAUNDRY</option>
+                            <option>GENERAL CLEANING</option>
+                            <option>SPA SERVICES</option>
+                          </select> <br><br>
+
+                          <label>Select your preffered place to get the service</label><br>
+                          <select>
+                            <option>At our identified location</option>
+                            <option>At your location</option>
+                          </select><br><br>
 
 
-          <p>what is your location</p><br>
-          <textarea  name ="message" rows="5" cols="45" placeholder="eg. Fitz building next to TRM"></textarea> <br>
+                          <p>what is your location</p><br>
+                          <textarea  name ="message" rows="5" cols="45" placeholder="eg. Fitz building next to TRM"></textarea> <br>
 
 
-        <p>Please describe your order</p>
-          <textarea  name ="message" rows="15" cols="45" placeholder="eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago salad"></textarea> 
-        <br />
-        <button type="submit" class="btn btn-primary mb-2"> Submit </button>
-    </form>
+                        <p>Please describe your order</p>
+                          <textarea  name ="message" rows="15" cols="45" placeholder="eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago salad"></textarea> 
+                        <br />
+                        <button type="submit" class="btn btn-primary mb-2"> Submit </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
     </div>
   </div>
-
+</section>
 
 {% endblock content %}
 

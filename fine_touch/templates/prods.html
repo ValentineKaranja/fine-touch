@@ -3,74 +3,32 @@
 
 
 {% block content %}
-<div class="articles" id="Products">
-	     		<div class="cards">
-	     			<h1 id="services"><u>PRODUCTS & SERVICES</u></h1>
-	     			<h2><u>1.cleaning services</u></h2>	
-		     			<div id="clean" class="gallery">
-		     				<img src="{% static 'images/cleaning-guys.png' %}">
-		     				<div class="text"><h2>General cleaning services</h2></div>
-		     			</div>
-		      			<div id="clean" class="gallery">
-		     				<img src="{% static 'images/laundry.png' %}">
-		     				<div class="text"><h2>Laundry services</h2></div>
-		     			</div>
-		     			
-     			</div>
 
-     			<div class="cards">
-	     			<h2><u>2.food delivery</u></h2>
-		     			<div id="food" class="gallery">
-		     				<img src="{% static 'images/other1.jpg' %}">
-		     				<div class="text"><h2>We cook and deliver nutritious meals</h2></div>
-		     			</div>
-		      			<div id="food" class="gallery">
-		     				<img src="{% static 'images/drinks.jpg' %}">
-		     				<div class="text"><h2>Blended juice!</h2></div>
-		     			</div>
-		     			
-     			</div>
-
-     			<div class="cards">
-	     			<h2><u>Salad bar menu</u></h2>
-		     			<div id="food" class="gallery">
-		     				<img src="{% static 'images/salad1.jpg' %}">
-		     				<div class="text"><h2>Mango,cucumber, beetroot salad</h2></div>
-		     			</div>
-		      			<div id="food" class="gallery">
-		     				<img src="{% static 'images/salad3.jpg' %}">
-		     				<div class="text"><h2>Tomato-avocado salad</h2></div>
-		     			</div>
-		     			
-     			</div>
-
-     			<div class="cards">
-	   	     			<div id="food" class="gallery">
-		     				<img src="{% static 'images/salad4.jpg' %}">
-		     				<div class="text"><h2>Fresh garden salad</h2></div>
-		     			</div>
-		      			<div id="food" class="gallery">
-		     				<img src="{% static 'images/salad2.jpg' %}">
-		     				<div class="text"><h2>Egg-avocado salad</h2></div>
-		     			</div>
-		     			
-     			</div>
-
-     			<div class="cards">
-	     			<h2><u>3.spa services</u></h2>
-		     			<div id="food" class="gallery">
-		     				<img src="{% static 'images/massage.jpg' %}">
-		     				<div class="text"><h2>Professional massage for body ache</h2></div>
-		     			</div>
-		      			<div id="food" class="gallery">
-		     				<img src="{% static 'images/beauty.jpg' %}">
-		     				<div class="text"><h2>beauty services</h2></div>
-		     			</div>
-		     			
-     			</div>
-
-
-     		</div>
-
+	{% for detail in details  %}
+	<section class="page-section">
+		<div class="container">
+			<div class="product-item">
+				<div class="product-item-title d-flex">
+					<div class="bg-faded p-5 d-flex ml-auto rounded">
+						<h2 class="section-heading mb-0">
+						<span class="section-heading-upper">Blended to Perfection</span>
+						<span class="section-heading-lower">{{detail.service_name}}</span>
+						</h2>
+					</div>
+				</div>
+					<img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{detail.image.url}}" alt="">
+					<div class="product-item-description d-flex mr-auto">
+						<div class="bg-faded p-5 rounded">
+							<p class="mb-0">{{detail.description}}</p>
+							<div class="intro-button mx-auto">
+								<a class="btn btn-primary btn-xl" href="{% url 'order' detail.slug %}">Make an Order</a>
+							</div>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+  		</section>
+	{% endfor %}
 
 {% endblock content %}

@@ -23,6 +23,7 @@ class Customer(models.Model):  # cascade means if model is deleted the relations
 class ProductName(models.Model):
     name = models.CharField(max_length=500, null=True, db_column='Product Offered')
     image = models.ImageField(upload_to='media_root', null=True, blank=True)
+    description = models.TextField(db_column='Product Description')
 
     def __str__(self):
         return self.name
@@ -33,7 +34,7 @@ class ProductServices(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     product_name = models.ForeignKey(ProductName, on_delete=models.CASCADE, related_name='product_services')
     image = models.ImageField(upload_to='media_root', null=True, blank=True)
-    description = models.TextField(db_column='Product Description')
+    description = models.TextField(db_column='Service Description')
 
 
     class Meta:
@@ -50,14 +51,14 @@ class ProductServices(models.Model):
 
 class Order(models.Model):
     STATUS = (
-        ('Pending', 'Pending'),
-        ('Out for delivery', 'Out for delivery'),
-        ('Delivered', 'Delivered'),
+        ('0', 'Pending'),
+        ('1', 'Out for delivery'),
+        ('2', 'Delivered'),
     )
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     product = models.ForeignKey(ProductServices, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    status = models.CharField(max_length=500, null=True, choices=STATUS)
+    status = models.CharField(max_length=500, null=True, choices=STATUS, default=0)
     location = models.CharField(max_length=500, null=True)
     description = models.TextField(db_column='Order Description')
 
