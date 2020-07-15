@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import ProductName, ProductServices, Order, Customer
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, CustomerForm
 
 
 # Create your views here.
@@ -69,6 +69,23 @@ def product(request, slug):
 
 def services(request):
     return render(request, 'services.html')
+
+
+@login_required(login_url='login')  # decorator redirects one to the login page
+# if they try to access this page
+def profile(request):
+    customer = request.user.customer  # gets current logged in customer
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+            # return redirect('account')
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'customer_profile.html', context=context_dict)
 
 
 @login_required(login_url='login')  # decorator redirects one to the login page

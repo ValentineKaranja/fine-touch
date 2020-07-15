@@ -17,3 +17,8 @@
 remote: Create a pull request for 'backend' on GitHub by visiting:
 remote:      https://github.com/IanMaguithi/fine-touch/pull/new/backend
 remote:
+
+<div class="about-intro">
+              <h1 style="text-align: center; color: rgb(51, 51, 0);">MAMI'S TOUCH HAVEN!</h1>
+              <h2><u>About Us</u></h2>
+            </div>

@@ -1,37 +1,43 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <section class="page-section about-heading">
     <div class="container">
-      <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" id="logo-3" src="cleaning-logo.png" alt="">
+      <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="{% static 'images/logo-dark.jpg' %}" alt="">
       <div class="about-heading-content">
         <div class="row">
           <div class="col-xl-9 col-lg-10 mx-auto">
             <div class="bg-faded rounded p-5">
-            
-            <div class="about-intro">
-              <h1 style="text-align: center; color: rgb(51, 51, 0);">MAMI'S TOUCH HAVEN!</h1>
-              <h2><u>About Us</u></h2>
-            </div>
-              <p>MAMI'S TOUCH is an online platform where your well-being journey bigins.It provides nutritious meals, drinks/smoothies, cleaning services, organising services and your spa moment that promotes your wellbeing at your convenience.It adds that fine touch to your life quickly,easily and efficiently.</p><br>
+            <h2 class="section-heading mb-4">
+                <span class="section-heading-upper">MAMI'S TOUCH HAVEN!</span>
+                <span class="section-heading-lower">About Our Cafe</span>
+            </h2>
 
-            <p>With the COVID 19 pandemic, optimal nutrition, cleanliness and avoiding crowded places/ keeping social distance has been encouraged as some of the ways towards prevention.With the services and products offered by MAMI'S TOUCH HAVEN promotes the above measures.</p><br>
+              <p>MAMI'S TOUCH is an online platform where your well-being journey bigins.It provides nutritious meals, drinks/smoothies,
+                cleaning services, organising services and your spa moment that promotes your wellbeing at your convenience.
+                It adds that fine touch to your life quickly,easily and efficiently.</p><br>
 
-            <p>Our aim is to provide quality products and services that promotes the health, wealth and well-being of families.</p><br>
+            <p>With the COVID 19 pandemic, optimal nutrition, cleanliness and avoiding crowded places/ keeping
+              social distance has been encouraged as some of the ways towards prevention.With the services and products offered by MAMI'S TOUCH HAVEN promotes the above measures.</p><br>
 
-            <p>Our goal has always been to promote wholesome well-being of individuals socially and economically.We build partnerships through trust and reliability.</p><br>
+            <p>Our aim is to provide quality products and services that promotes the health,
+              wealth and well-being of families.</p><br>
+
+            <p>Our goal has always been to promote wholesome well-being of individuals socially and
+              economically.We build partnerships through trust and reliability.</p><br>
 
             <p>We are aligned towards achieving the following SDGs:
-            <ul>
-              <li>Zero hunger</li>
-              <li>Zero poverty</li>
-              <li>Economic growth</li>
-              <li>Good health and well-being for all</li>
-              <li>Gender equality</li>
-              <li>Partnerships</li>
-            </ul>
-            </p><br><br>
+              <ul>
+                <li>Zero hunger</li>
+                <li>Zero poverty</li>
+                <li>Economic growth</li>
+                <li>Good health and well-being for all</li>
+                <li>Gender equality</li>
+                <li>Partnerships</li>
+              </ul>
+            </p>
+              <br><br>
 
             <p><strong id="strong">Adequate nutrition = improved health & improved economic productivity = increased survival rate and wellbeing = a healthy+wealthy nation</strong></p>
           </div><br><br><br>
@@ -39,7 +45,6 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
 
 {% endblock content %}
