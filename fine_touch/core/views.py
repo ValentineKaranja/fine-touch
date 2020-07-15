@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .decorators import unauthenticated_user
 from django.contrib import messages
@@ -6,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import ProductName, ProductServices, Order, Customer
 from .forms import OrderForm, CreateUserForm
+
 
 # Create your views here.
 
@@ -35,8 +37,12 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            if user.is_active:
+                login(request, user)
+                return redirect('home')
+            else:
+                # An inactive account was used - no logging in!
+                return HttpResponse("Your Fine-Touch account is disabled.")
         else:
             messages.info(request, 'Username or Password is incorrect')
 
@@ -48,17 +54,17 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 
 def home(request):
     products = ProductName.objects.all()
-    return render(request, 'index.html', {'products':products})
+    return render(request, 'index.html', {'products': products})
 
 
 def product(request, slug):
     details = ProductServices.objects.filter(product_name__slug=slug)
-    return render(request, 'prods.html', {'details':details})
+    return render(request, 'prods.html', {'details': details})
 
 
 def services(request):
@@ -84,7 +90,7 @@ def order(request, slug):
             obj.save()
             print('item added')
             return redirect('/')
-    
+
     return render(request, 'order.html', {'form': form})
 
 

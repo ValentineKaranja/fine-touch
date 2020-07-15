@@ -17,7 +17,8 @@ class OrderForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea(
         attrs={
             "class": "form-control",
-            "placeholder": "eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago salad"
+            "placeholder": "eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago "
+                           "salad "
         })
     )
 

@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 from django.shortcuts import reverse
 
 from phonenumber_field.modelfields import PhoneNumberField
+
 
 # Create your models here.
 class Customer(models.Model):  # cascade means if model is deleted the relationship is also deleted
@@ -11,8 +11,8 @@ class Customer(models.Model):  # cascade means if model is deleted the relations
     # cater for users
     name = models.CharField(max_length=500, null=True)
     email = models.EmailField(null=True)
-    
-    phone_number = PhoneNumberField()
+
+    phone_number = PhoneNumberField(null=True)
     # profile_pic = models.ImageField(default='car.jpg', null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -28,8 +28,8 @@ class ProductName(models.Model):
 
     def get_absolute_url(self):
         return reverse("product", kwargs={
-        'slug': self.slug
-    })
+            'slug': self.slug
+        })
 
     def __str__(self):
         return self.name
@@ -42,14 +42,13 @@ class ProductServices(models.Model):
     image = models.ImageField(upload_to='media_root', null=True, blank=True)
     description = models.TextField(db_column='Service Description')
 
-
     class Meta:
         verbose_name_plural = 'Product Services'
 
     def get_absolute_url(self):
         return reverse("order", kwargs={
-        'slug': self.slug
-    })
+            'slug': self.slug
+        })
 
     def __str__(self):
         return self.service_name
@@ -70,4 +69,3 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product.service_name
-    
