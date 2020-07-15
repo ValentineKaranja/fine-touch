@@ -13,7 +13,7 @@ class Customer(models.Model):  # cascade means if model is deleted the relations
     email = models.EmailField(null=True)
 
     phone_number = PhoneNumberField(null=True)
-    profile_pic = models.ImageField(default='car.jpg', null=True, blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pic', default='cleaning-logo.png', null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

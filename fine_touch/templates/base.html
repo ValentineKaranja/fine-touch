@@ -24,13 +24,18 @@
   <link href="{% static 'css/business-casual.min.css' %}" rel="stylesheet" type="text/css">
   <!-- <link href="{% static 'css/business-casual.css' %}" rel="stylesheet" type="text/css"> -->
   <link href="{% static 'css/order.css' %}" rel="stylesheet" type="text/css">
-  <link href="{% static 'css/prods.css' %}" rel="stylesheet" type="text/css" >
+  <link href="{% static 'css/profile_pic.css' %}" rel="stylesheet" type="text/css" >
   <link href="{% static 'css/bootsrap.css' %}" rel="stylesheet" type="text/css">
 
 
 </head>
 
 <body>
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower">Mami's Touch Haven! </span>
+    <span class="site-heading-upper text-primary mb-3">A fine touch right at your door step</span>
+
+</h1>
 {% include "navbar.html" %}
 
  {% block content %}
