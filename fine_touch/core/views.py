@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .decorators import unauthenticated_user
@@ -59,7 +60,11 @@ def logout_page(request):
 
 def home(request):
     products = ProductName.objects.all()
-    return render(request, 'index.html', {'products': products})
+    paginator = Paginator(products, 5)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'index.html', {'products': products,
+                                          'page_obj': page_obj, })
 
 
 def product(request, slug):
@@ -92,7 +97,7 @@ def profile(request):
 # if they try to access this page
 def order(request, slug):
     customer = Customer.objects.get(user=request.user)
-    product = ProductServices.objects.get(slug=slug)
+    prod = ProductServices.objects.get(slug=slug)
     form = OrderForm()
 
     if request.method == 'POST':
@@ -102,7 +107,7 @@ def order(request, slug):
                 customer=customer,
                 location=form.cleaned_data["location"],
                 description=form.cleaned_data["description"],
-                product=product,
+                product=prod,
             )
             obj.save()
             print('item added')
