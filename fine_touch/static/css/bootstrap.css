@@ -298,8 +298,8 @@
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #f1a80ad5;
+  border-color: #8b6107;
 }
 
 .page-item.disabled .page-link {

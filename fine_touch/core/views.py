@@ -60,16 +60,18 @@ def logout_page(request):
 
 def home(request):
     products = ProductName.objects.all()
-    paginator = Paginator(products, 5)  # Show 25 contacts per page.
+    paginator = Paginator(products, 5)  # Show 5 services per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'index.html', {'products': products,
-                                          'page_obj': page_obj, })
+    return render(request, 'index.html', {'page_obj': page_obj})
 
 
 def product(request, slug):
     details = ProductServices.objects.filter(product_name__slug=slug)
-    return render(request, 'prods.html', {'details': details})
+    paginator = Paginator(details, 5)  # Show 5 products per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'prods.html', {'page_obj': page_obj})
 
 
 def services(request):

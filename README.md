@@ -4,7 +4,9 @@
 
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+.
+This project is built using the [Django](https://www.djangoproject.com/) web framework. 
+It runs on Python 3.6+ and templates from [Start Bootstrap - Business Casual](https://startbootstrap.com/themes/business-casual/)
+ 
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
