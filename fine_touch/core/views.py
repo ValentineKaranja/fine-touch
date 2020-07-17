@@ -120,3 +120,9 @@ def order(request, slug):
 
 def about(request):
     return render(request, 'about.html')
+
+
+def admin_dash(request):
+    return render(request, 'admin_pages/dashboard.html')
+
+
