@@ -6,6 +6,16 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
+
+
+class LoggedInUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='logged_in_user')
+    session_key =models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Customer(models.Model):  # cascade means if model is deleted the relationship is also deleted
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)  # extending this model to
     # cater for users
