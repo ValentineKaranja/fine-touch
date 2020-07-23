@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .models import ProductName, ProductServices, Order, Customer
-from .forms import OrderForm, CreateUserForm, CustomerForm
+from .forms import OrderForm, CreateUserForm, CustomerForm, ProductNameForm, ProductServicesForm
 
 
 # Create your views here.
@@ -123,6 +123,99 @@ def about(request):
 
 
 def admin_dash(request):
-    return render(request, 'admin_pages/dashboard.html')
+    products = ProductName.objects.all()
+    services = ProductServices.objects.all()
+    orders = Order.objects.all()
+    return render(request, 'admin_pages/dashboard.html', {'products': products})
 
 
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+def create_product(request):
+    form = ProductNameForm()
+    if request.method == 'POST':
+        form = ProductNameForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dash')
+
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'admin_pages/add_update.html', context=context_dict)
+
+
+@login_required(login_url='login')
+# @allowed_users(allowed_roles=['admin'])
+def update_product(request, slug):
+    product = ProductName.objects.get(slug=slug)
+    form = ProductNameForm(instance=product)  # prefills the form to be updated
+    if request.method == 'POST':
+        form = ProductNameForm(request.POST, request.FILES, instance=product)  # this enables the form to be saved only in this instance
+        # not as a new form
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dash')
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'admin_pages/add_update.html', context=context_dict)
+
+
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+def delete_product(request, slug):
+    product = ProductName.objects.get(slug=slug)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('admin_dash')
+    context_dict = {
+        'product': product,
+    }
+    return render(request, 'admin_pages/delete.html', context=context_dict)
+
+
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+def create_service(request):
+    form = ProductServicesForm()
+    if request.method == 'POST':
+        form = ProductServicesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dash')
+
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'admin_pages/add_update.html', context=context_dict)
+
+
+@login_required(login_url='login')
+# @allowed_users(allowed_roles=['admin'])
+def update_service(request, slug):
+    service = ProductServices.objects.get(slug=slug)
+    form = ProductServicesForm(instance=service)  # prefills the form to be updated
+    if request.method == 'POST':
+        form = ProductServicesForm(request.POST, request.FILES, instance=service)  # this enables the form to be saved only in this instance
+        # not as a new form
+        if form.is_valid():
+            form.save()
+            return redirect('admin_dash')
+    context_dict = {
+        'form': form,
+    }
+    return render(request, 'admin_pages/add_update.html', context=context_dict)
+
+
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+def delete_service(request, slug):
+    service = ProductServices.objects.get(slug=slug)
+    if request.method == 'POST':
+        service.delete()
+        return redirect('admin_dash')
+    context_dict = {
+        'service': service,
+    }
+    return render(request, 'admin_pages/delete.html', context=context_dict)
