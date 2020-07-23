@@ -1,4 +1,6 @@
 from django.contrib.sessions.models import Session
+
+
 # helps us alter request and response
 # so for every user checks if logged in 
 # if true delete previous session key and assign a new one

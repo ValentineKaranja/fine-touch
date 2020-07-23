@@ -10,7 +10,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class LoggedInUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='logged_in_user')
-    session_key =models.CharField(max_length=32)
+    session_key = models.CharField(max_length=32)
 
     def __str__(self):
         return self.user.username
