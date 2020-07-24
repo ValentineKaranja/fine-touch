@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -97,6 +97,7 @@ def profile(request):
 
 @login_required(login_url='login')  # decorator redirects one to the login page
 # if they try to access this page
+@allowed_users(allowed_roles=['customer'])
 def order(request, slug):
     customer = Customer.objects.get(user=request.user)
     prod = ProductServices.objects.get(slug=slug)
@@ -122,15 +123,21 @@ def about(request):
     return render(request, 'about.html')
 
 
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+@allowed_users(allowed_roles=['seller'])
 def admin_dash(request):
     products = ProductName.objects.all()
-    services = ProductServices.objects.all()
+    service = ProductServices.objects.all()
     orders = Order.objects.all()
-    return render(request, 'admin_pages/dashboard.html', {'products': products})
+    context = {'products': products,
+               'services': service,
+               'orders': orders,
+               }
+    return render(request, 'admin_pages/dashboard.html', context)
 
 
 @login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
-# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+@allowed_users(allowed_roles=['seller'])
 def create_product(request):
     form = ProductNameForm()
     if request.method == 'POST':
@@ -146,12 +153,13 @@ def create_product(request):
 
 
 @login_required(login_url='login')
-# @allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['seller'])
 def update_product(request, slug):
-    product = ProductName.objects.get(slug=slug)
+    prod = ProductName.objects.get(slug=slug)
     form = ProductNameForm(instance=product)  # prefills the form to be updated
     if request.method == 'POST':
-        form = ProductNameForm(request.POST, request.FILES, instance=product)  # this enables the form to be saved only in this instance
+        form = ProductNameForm(request.POST, request.FILES,
+                               instance=prod)  # this enables the form to be saved only in this instance
         # not as a new form
         if form.is_valid():
             form.save()
@@ -163,11 +171,11 @@ def update_product(request, slug):
 
 
 @login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
-# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+@allowed_users(allowed_roles=['seller'])  # decorator ensures only an admin can log in into this page
 def delete_product(request, slug):
-    product = ProductName.objects.get(slug=slug)
+    prod = ProductName.objects.get(slug=slug)
     if request.method == 'POST':
-        product.delete()
+        prod.delete()
         return redirect('admin_dash')
     context_dict = {
         'product': product,
@@ -176,7 +184,7 @@ def delete_product(request, slug):
 
 
 @login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
-# @allowed_users(allowed_roles=['admin'])  # decorator ensures only an admin can log in into this page
+@allowed_users(allowed_roles=['seller'])  # decorator ensures only an admin can log in into this page
 def create_service(request):
     form = ProductServicesForm()
     if request.method == 'POST':
@@ -197,7 +205,8 @@ def update_service(request, slug):
     service = ProductServices.objects.get(slug=slug)
     form = ProductServicesForm(instance=service)  # prefills the form to be updated
     if request.method == 'POST':
-        form = ProductServicesForm(request.POST, request.FILES, instance=service)  # this enables the form to be saved only in this instance
+        form = ProductServicesForm(request.POST, request.FILES,
+                                   instance=service)  # this enables the form to be saved only in this instance
         # not as a new form
         if form.is_valid():
             form.save()

@@ -21,7 +21,6 @@ class Customer(models.Model):  # cascade means if model is deleted the relations
     # cater for users
     name = models.CharField(max_length=500, null=True)
     email = models.EmailField(null=True)
-
     phone_number = PhoneNumberField(null=True)
     profile_pic = models.ImageField(upload_to='media_root/profile_pic', default='cleaning-logo.png', null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
