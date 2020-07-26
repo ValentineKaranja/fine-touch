@@ -6,21 +6,26 @@ from django.contrib.auth.models import User
 from .models import Order, Customer, ProductName, ProductServices
 
 
-class OrderForm(forms.Form):
-    location = forms.CharField(
-        max_length=99,
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Tell us your location, eg. Fitz building next to TRM"
-        })
-    )
-    description = forms.CharField(widget=forms.Textarea(
-        attrs={
-            "class": "form-control",
-            "placeholder": "eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago "
-                           "salad "
-        })
-    )
+# class OrderForm(forms.Form):
+#     location = forms.CharField(
+#         max_length=99,
+#         widget=forms.TextInput(attrs={
+#             "class": "form-control",
+#             "placeholder": "Tell us your location, eg. Fitz building next to TRM"
+#         })
+#     )
+#     description = forms.CharField(widget=forms.Textarea(
+#         attrs={
+#             "class": "form-control",
+#             "placeholder": "eg.I need general cleaning at my house. or  Cook and deliver beef stew  or  egg-avocago "
+#                            "salad "
+#         })
+#     )
+
+class OrderForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ['location', 'description']
 
 
 class CreateUserForm(UserCreationForm):

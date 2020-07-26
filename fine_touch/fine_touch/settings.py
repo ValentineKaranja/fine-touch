@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'core.apps.CoreConfig',  # referring to config file
     'phonenumber_field',  # django phonenumber field
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'core.middlewares.OneSessionPerUser',
+    # 'core.middlewares.OneSessionPerUser',
 ]
 
 ROOT_URLCONF = 'fine_touch.urls'

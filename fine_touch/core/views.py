@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
+
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -117,6 +119,58 @@ def order(request, slug):
             return redirect('/')
 
     return render(request, 'order.html', {'form': form})
+
+
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+@allowed_users(allowed_roles=['customer'])
+def order_list(request):
+    orders = Order.objects.filter(customer__user=request.user)
+    return render(request, 'order_status.html', {'orders': orders})
+
+
+def save_order_form(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            orders = Order.objects.filter(customer__user=request.user)
+            data['html_order_list'] = render_to_string('partial_order_list.html', {
+                'orders': orders,
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+
+def order_update(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+    else:
+        form = OrderForm(instance=order)
+    return save_order_form(request, form, 'partial_order_update.html')
+
+
+def order_delete(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    data = dict()
+    if request.method == 'POST':
+        order.delete()
+        data['form_is_valid'] = True  # This is just to play along with the existing code
+        orders = Order.objects.filter(customer__user=request.user)
+        data['html_order_list'] = render_to_string('partial_order_list.html', {
+            'orders': orders,
+        })
+    else:
+        context = {'order': order}
+        data['html_form'] = render_to_string('partial_order_delete.html',
+                                             context,
+                                             request=request,
+                                             )
+    return JsonResponse(data)
 
 
 def about(request):
