@@ -1,6 +1,6 @@
 {% for order in orders %}
     <tr>
-        <td>{{ order.id }}</td>
+        <td>{{ forloop.counter }}</td>
         <td>{{ order.product.service_name }}</td>
         <td>{{ order.location }}</td>
         <td>{{ order.description }}</td>
@@ -23,6 +23,8 @@
         <td colspan="7" class="text-center bg-warning">No orders made</td>
     </tr>
     <tr>
-        <td colspan="7" class="text-center bg-info">Proceed to make an order</td>
+        <td colspan="7" ><a  class='btn btn-info float-right' href="{% url 'home' %}">
+            <i class="fa fa-angle-left left"></i> Proceed to make an order</a>
+        </td>
     </tr>
 {% endfor %}

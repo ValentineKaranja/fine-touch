@@ -20,6 +20,9 @@
             <a class="nav-link text-uppercase text-expanded" href="{% url 'about' %}">About us</a>
           </li>
           {% if user.is_authenticated %}
+           <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'order_list' %}">Order status</a>
+          </li>
           <li class="nav-item px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="{% url 'profile' %}">Profile</a>
           </li>

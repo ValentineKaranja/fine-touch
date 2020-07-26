@@ -145,6 +145,8 @@ def save_order_form(request, form, template_name):
     return JsonResponse(data)
 
 
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+@allowed_users(allowed_roles=['customer'])
 def order_update(request, pk):
     order = get_object_or_404(Order, pk=pk)
     if request.method == 'POST':
@@ -154,6 +156,8 @@ def order_update(request, pk):
     return save_order_form(request, form, 'partial_order_update.html')
 
 
+@login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
+@allowed_users(allowed_roles=['customer'])
 def order_delete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     data = dict()
