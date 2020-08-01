@@ -7,9 +7,12 @@ urlpatterns = [
     path('login/', views.login_page, name='login'),
     path('logout/', views.logout_page, name='logout'),
 
-    path('reset_password/',
-         auth_views.PasswordResetView.as_view(template_name='accounts/password_reset_form.html'),
-         name='reset_password'),
+    # path('reset_password/',
+    #      auth_views.PasswordResetView.as_view(template_name='accounts/password_reset_form.html'),
+    #      name='reset_password'),
+
+    path('reset_password/', views.password_reset_request, name='reset_password'),
+    # will handle the email sent to user
 
     path('reset_password_sent/',
          auth_views.PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'),
@@ -24,7 +27,6 @@ urlpatterns = [
     path('reset_password_complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),
          name='password_reset_complete'),  # success link password reset complete
-
 
     path('admin_page/', views.admin_dash, name='admin_dash'),
     path('add_product_name/', views.create_product, name='create_product'),
