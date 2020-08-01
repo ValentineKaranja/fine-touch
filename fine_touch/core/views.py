@@ -2,19 +2,20 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail, EmailMessage, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from django.conf import settings
 
-from .decorators import unauthenticated_user, allowed_users
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+from .decorators import unauthenticated_user, allowed_users
 from .models import ProductName, ProductServices, Order, Customer
 from .forms import OrderForm, CreateUserForm, CustomerForm, ProductNameForm, ProductServicesForm
 
@@ -43,7 +44,8 @@ def password_reset_request(request):
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email, 'Mamis Touch Support <djangologinsmtp@gmail.com>', [user.email], fail_silently=False)
+                        send_mail(subject, email, 'Mamis Touch Support <djangologinsmtp@gmail.com>', [user.email],
+                                  fail_silently=False)
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect("password_reset_done")
@@ -154,6 +156,13 @@ def order(request, slug):
             )
             obj.save()
             print('item added')
+            template = render_to_string('order_mail.html', {'name': customer.name})
+            try:
+                email = EmailMessage('Your Have Successfully Made an Order', template,
+                                     settings.EMAIL_HOST_USER, [customer.email])
+                email.send(fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
             return redirect('/')
 
     return render(request, 'order.html', {'form': form})
