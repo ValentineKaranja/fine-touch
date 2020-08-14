@@ -1,0 +1,30 @@
+{% for order in orders %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ order.product.service_name }}</td>
+        <td>{{ order.location }}</td>
+        <td>{{ order.description }}</td>
+        <td>{{ order.get_status_display }}</td>
+        <td>
+          <button type="button"
+                  class="btn btn-warning btn-sm js-update-order"
+                  data-url="{% url 'order_update' order.pk %}">
+            <span class="glyphicon glyphicon-pencil"></span> Edit
+          </button>
+             <button type="button"
+              class="btn btn-danger btn-sm js-delete-order"
+              data-url="{% url 'order_delete' order.pk %}">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+            </button>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="7" class="text-center bg-warning">No orders made</td>
+    </tr>
+    <tr>
+        <td colspan="7" ><a  class='btn btn-info float-right' href="{% url 'home' %}">
+            <i class="fa fa-angle-left left"></i> Proceed to make an order</a>
+        </td>
+    </tr>
+{% endfor %}

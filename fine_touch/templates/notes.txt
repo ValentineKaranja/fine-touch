@@ -1,0 +1,24 @@
+
+                          <label>Select your preffered place to get the service</label><br>
+                          <select>
+                            <option>At our identified location</option>
+                            <option>At your location</option>
+                          </select><br><br>
+
+
+                          <p>what is your location</p><br>
+                          <textarea  name ="message" rows="5" cols="45" ></textarea> <br>
+
+
+                        <p>Please describe your order</p>
+                          <textarea  name ="message" rows="15" cols="45" ></textarea> 
+                        <br />
+
+remote: Create a pull request for 'backend' on GitHub by visiting:
+remote:      https://github.com/IanMaguithi/fine-touch/pull/new/backend
+remote:
+
+<div class="about-intro">
+              <h1 style="text-align: center; color: rgb(51, 51, 0);">MAMI'S TOUCH HAVEN!</h1>
+              <h2><u>About Us</u></h2>
+            </div>
