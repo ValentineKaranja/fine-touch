@@ -238,7 +238,7 @@ def admin_dash(request):
                'services': service,
                'orders': orders,
                }
-    return render(request, 'admin_pages/dashboard.html', context)
+    return render(request, 'admin_pages/index.html', context)
 
 
 @login_required(login_url='login')  # decorator redirects one to the login page if they try to access this page
